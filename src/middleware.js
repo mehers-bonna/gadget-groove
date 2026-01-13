@@ -1,10 +1,12 @@
-import { NextResponse } from 'next/server';
+import { withAuth } from "next-auth/middleware";
 
-export function middleware(request) {
-  return NextResponse.next();
-}
+export default withAuth({
+  pages: {
+    signIn: "/login", // User logged in na thakle ekhane pathiye dibe
+  },
+});
 
-// Shudhu dashboard route-e protection thakbe
-export const config = {
-  matcher: ['/dashboard/:path*'],
+export const config = { 
+  // Ei path-gulo login chada access kora jabe na
+  matcher: ["/dashboard/:path*"] 
 };
