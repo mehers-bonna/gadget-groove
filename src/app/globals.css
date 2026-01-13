@@ -1,26 +1,63 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* High-Tech Slate & Lime Palette */
+  --background: #020617; /* Deepest Slate */
+  --foreground: #f8fafc; /* Near White */
+  --accent-lime: #a3e635; /* Electric Lime */
+  --slate-dark: #0f172a; /* Card/Navbar Background */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-lime-primary: var(--accent-lime);
+  --color-slate-card: var(--slate-dark);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+/* Force dark theme for tech vibe unless you want a light mode too */
+@media (prefers-color-scheme: light) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #f8fafc;
+    --foreground: #020617;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Smooth transitions and fonts */
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Selection Color */
+::selection {
+  background-color: var(--accent-lime);
+  color: #000;
+}
+
+/* Custom Scrollbar for a premium look */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #020617;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-lime);
+}
+
+/* Utility for smooth scrolling */
+html {
+  scroll-smooth: always;
 }
