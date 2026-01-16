@@ -2,11 +2,11 @@
 
 GadgetGroove is a high-performance computing and hardware management platform designed for enthusiasts. It features a futuristic, terminal-inspired web interface that allows users to explore premium hardware components and seamlessly sync new equipment into the system's database.
 
-##Live Link: 
+##Live Link: https://gadget-groove-sooty.vercel.app/
 
 
 Installation & Setup:
-git clone https://github.com/your-username/gadget-groove.git
+git clone https://github.com/mehers-bonna/gadget-groove.git
 cd gadget-groove
 
 Install Dependencies:
