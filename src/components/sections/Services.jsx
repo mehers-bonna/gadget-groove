@@ -1,4 +1,3 @@
-// Tool er poriborte Toolbox ba Wrench use korte hobe
 import { ShieldCheck, Truck, Toolbox } from "lucide-react";
 
 export default function Services() {
@@ -14,14 +13,14 @@ export default function Services() {
       desc: "3-year minimum security on every component." 
     },
     { 
-      icon: <Toolbox />, // Ekhane Toolbox use kora hoyeche
+      icon: <Toolbox />,
       title: "Tech Support", 
       desc: "24/7 expert handshake for your build issues." 
     }
   ];
 
   return (
-    <section className="container mx-auto px-6 py-20 grid md:grid-cols-3 gap-12">
+    <section className="container mx-auto px-6 py-20 grid md:grid-cols-3 gap-12 -mt-28">
       {srv.map((s, i) => (
         <div key={i} className="text-center space-y-4 group">
           <div className="mx-auto w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center text-lime-400 group-hover:bg-lime-400 group-hover:text-black transition-all">
