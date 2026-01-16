@@ -1,14 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { ShoppingCart, ArrowRight, Cpu, Zap } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export default function ItemList() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // [cite: 2026-01-05] Requirement: Fetch and show a list of items from Express Server API
     const fetchProducts = async () => {
       try {
         const res = await fetch("http://localhost:5000/api/products");
@@ -24,17 +23,17 @@ export default function ItemList() {
   }, []);
 
   if (loading) return (
-    <div className="min-h-screen bg-black flex items-center justify-center">
+    <div className="min-h-screen bg-[#020617] flex items-center justify-center">
       <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-lime-400"></div>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-black text-white p-6 md:p-20">
+    <div className="min-h-screen bg-[#020617] text-white p-6 md:p-20">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
-        <div className="mb-16">
-          <h1 className="text-5xl font-black italic uppercase tracking-tighter">
+        <div className="mb-16 border-l-4 border-lime-400 pl-6">
+          <h1 className="text-5xl md:text-6xl font-black italic uppercase tracking-tighter">
             Hardware <span className="text-lime-400">Catalog</span>
           </h1>
           <p className="text-slate-500 font-bold uppercase text-[10px] tracking-[5px] mt-2">
@@ -42,47 +41,49 @@ export default function ItemList() {
           </p>
         </div>
 
-        {/* [cite: 2026-01-05] Requirement: Item list grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Item list grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {products.map((item) => (
-            <div key={item._id} className="group bg-slate-900/40 border border-white/5 rounded-[2rem] overflow-hidden hover:border-lime-400/50 transition-all duration-500 shadow-2xl">
+            <div key={item._id} className="group bg-[#0f172a]/40 border border-white/5 rounded-[2.5rem] overflow-hidden hover:border-lime-400/30 transition-all duration-500 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+              
               {/* Image Section */}
-              <div className="relative h-64 overflow-hidden">
-                <img 
-                  src={item.image} 
-                  alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                />
-                <div className="absolute top-4 right-4 bg-black/80 backdrop-blur-md px-4 py-2 rounded-full border border-lime-400/20">
-                  <span className="text-lime-400 font-black italic">${item.price}</span>
+              <div className="relative h-64 overflow-hidden p-4">
+                <div className="w-full h-full rounded-[2rem] overflow-hidden relative">
+                  <img 
+                    src={item.image} 
+                    alt={item.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  {/* Price Tag Overlay */}
+                  <div className="absolute top-4 right-4 bg-lime-400 text-black px-4 py-1 rounded-full font-black italic text-sm shadow-lg">
+                    ${item.price}
+                  </div>
                 </div>
               </div>
 
-              {/* [cite: 2026-01-05] Requirement: Item Card including name, description, price */}
-              <div className="p-8">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="bg-lime-400/10 text-lime-400 text-[10px] font-black uppercase px-3 py-1 rounded-md tracking-widest border border-lime-400/20">
-                    {item.category}
+              {/* Item Card Body */}
+              <div className="px-8 pb-8 pt-2">
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="text-lime-400 text-[9px] font-black uppercase tracking-[3px] opacity-70">
+                     {item.category}
                   </span>
                 </div>
-                <h3 className="text-xl font-bold mb-3 group-hover:text-lime-400 transition-colors uppercase italic tracking-tight leading-none">
+                
+                <h3 className="text-xl font-black mb-3 group-hover:text-lime-400 transition-colors uppercase italic tracking-tight leading-none h-12 line-clamp-2">
                   {item.title}
                 </h3>
-                <p className="text-slate-400 text-sm line-clamp-2 mb-6 font-medium leading-relaxed">
+                
+                <p className="text-slate-500 text-xs line-clamp-2 mb-8 font-medium leading-relaxed">
                   {item.description}
                 </p>
 
-                <div className="flex items-center justify-between pt-6 border-t border-white/5">
-                  {/* [cite: 2026-01-05] Requirement: Item Details Page Link */}
-                  <Link 
-                    href={`/items/${item._id}`}
-                    className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-white transition-colors"
-                  >
-                    View Specs <ArrowRight size={14} />
+                {/* Updated Action Button */}
+                <div className="pt-6 border-t border-white/5">
+                  <Link href={`/items/${item._id}`} className="block">
+                    <button className="w-full bg-white/5 border border-white/10 text-white py-4 rounded-2xl font-black uppercase text-[10px] tracking-[3px] italic flex items-center justify-center gap-3 group-hover:bg-lime-400 group-hover:text-black group-hover:border-lime-400 transition-all duration-300">
+                      View Full Specs <ArrowRight size={14} />
+                    </button>
                   </Link>
-                  <button className="bg-white text-black p-3 rounded-xl hover:bg-lime-400 transition-all hover:scale-110">
-                    <ShoppingCart size={20} />
-                  </button>
                 </div>
               </div>
             </div>

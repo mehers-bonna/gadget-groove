@@ -15,7 +15,7 @@ export default function LoginPage() {
     e.preventDefault();
     setIsLoading(true);
 
-    // [cite: 2026-01-05] Requirement: Implement mock login using hardcoded email & password
+    // Implement mock login using hardcoded email & password
     const res = await signIn("credentials", {
       email,
       password,
@@ -24,7 +24,7 @@ export default function LoginPage() {
 
     if (res.ok) {
       toast.success("CORE ACCESS GRANTED");
-      // [cite: 2026-01-05] Requirement: On successful login, redirect to items/lists page
+      // On successful login, redirect to items/lists page
       router.push("/items");
     } else {
       toast.error("ENCRYPTION MISMATCH: ACCESS DENIED");
@@ -103,7 +103,7 @@ export default function LoginPage() {
             </span>
           </div>
           
-          {/* [cite: 2026-01-05] Requirement: Optional (Highly Recommended) Use NextAuth.js for social login */}
+          {/* NextAuth.js for social login */}
           <button 
             onClick={() => signIn("google", { callbackUrl: "/items" })}
             className="w-full bg-[#1e293b] text-white font-bold py-4 rounded-xl border border-white/5 hover:border-lime-400/50 transition-all flex items-center justify-center space-x-3 group"

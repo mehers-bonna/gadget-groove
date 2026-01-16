@@ -70,7 +70,7 @@ html {
     animation: marquee 30s linear infinite;
   }
 
-  /* Hover korle animation theme thakbe */
+  /* Hover animation */
   .group:hover .animate-marquee {
     animation-play-state: paused;
   }
