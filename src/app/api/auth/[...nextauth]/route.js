@@ -27,15 +27,18 @@ const handler = NextAuth({
     strategy: "jwt",
   },
   callbacks: {
-    // Token generate for mock login
+    // User login token id email saving
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
+        token.email = user.email;
       }
       return token;
     },
     async session({ session, token }) {
-      session.user.id = token.id;
+      if (token) {
+        session.user.id = token.id;
+      }
       return session;
     },
     async redirect({ url, baseUrl }) {

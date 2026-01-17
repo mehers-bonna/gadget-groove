@@ -15,17 +15,19 @@ export default function LoginPage() {
     e.preventDefault();
     setIsLoading(true);
 
-    // Implement mock login using hardcoded email & password
     const res = await signIn("credentials", {
       email,
       password,
-      redirect: false,
+      redirect: false, 
     });
 
     if (res.ok) {
       toast.success("CORE ACCESS GRANTED");
-      // On successful login, redirect to items/lists page
-      router.push("/items");
+      router.refresh(); 
+      
+      setTimeout(() => {
+        router.push("/items");
+      }, 100);
     } else {
       toast.error("ENCRYPTION MISMATCH: ACCESS DENIED");
       setIsLoading(false);
