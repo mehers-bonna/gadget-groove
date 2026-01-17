@@ -4,13 +4,10 @@ import CredentialsProvider from "next-auth/providers/credentials";
 
 const handler = NextAuth({
   providers: [
-    // Use NextAuth.js for social login
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
-    
-    // Implement mock login using hardcoded email & password
     CredentialsProvider({
       name: "Credentials",
       credentials: {
@@ -18,6 +15,7 @@ const handler = NextAuth({
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
+        // Hardcoded credentials check
         if (credentials.email === "admin@gadget.com" && credentials.password === "123456") {
           return { id: "1", name: "System Admin", email: "admin@gadget.com" };
         }
@@ -25,13 +23,22 @@ const handler = NextAuth({
       }
     }),
   ],
-  // Store credentials in cookies
   session: {
     strategy: "jwt",
   },
   callbacks: {
+    // Token generate for mock login
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      session.user.id = token.id;
+      return session;
+    },
     async redirect({ url, baseUrl }) {
-      // On successful login, redirect to items page
       return baseUrl + "/items";
     },
   },
